@@ -1,4 +1,6 @@
-#include <GLUT/glut.h> 
+//using Xcode MacOs
+
+#include <GLUT/glut.h>
 #include <cmath>
 #include <vector>
 using namespace std;
@@ -165,15 +167,35 @@ void checkCollisions() {
     }
 }
 
-// Display function and Background 
+// Function to add a thematic background (fog, gravestones, and moon)
+void drawThematicBackground() {
+    // Sky
+    glColor3f(0.1f, 0.1f, 0.3f);  // Dark blue sky
+    drawRectangle(-1.0f, -1.0f, 2.0f, 2.0f);
+
+    // Mist / Fog
+    glColor4f(0.5f, 0.5f, 0.5f, 0.4f);  // Light gray mist with some transparency
+    drawRectangle(-1.0f, -0.5f, 2.0f, 1.0f);
+
+    // Gravestones
+    glColor3f(0.6f, 0.6f, 0.6f);  // Light gray gravestones
+    drawRectangle(-0.9f, -0.7f, 0.1f, 0.3f);
+    drawRectangle(0.7f, -0.7f, 0.1f, 0.3f);
+    drawRectangle(-0.6f, -0.9f, 0.1f, 0.3f);
+
+    // Moon
+    glColor3f(1.0f, 1.0f, 1.0f);  // White for the moon
+    drawCircle(0.8f, 0.8f, 0.1f, 30);
+}
+
+// Modify the display function to include the background
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Background
-    glColor3f(0.6f, 0.0f, 0.0f);  // Blood red color
-    drawRectangle(-1.0f, -1.0f, 2.0f, 2.0f);
+    // Draw the thematic background
+    drawThematicBackground();
 
-
+    // Draw the zombies and projectiles
     drawZombie(zombie1X, zombie1Y, zombie1Scale, 0.0f, 0.8f, 0.0f);
     drawZombie(zombie2X, zombie2Y, zombie2Scale, 0.6f, 0.2f, 0.6f);
     drawProjectiles();
